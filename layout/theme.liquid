@@ -1,129 +1,132 @@
-<!DOCTYPE html>
-  <html lang="en">
+<!doctype html>
+<html lang="en">
   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>McLiquid</title>
-      <style>
-          body, html {
-              margin: 0;
-              padding: 0;
-              height: 100%;
-              font-family: Arial, sans-serif;
-          }
-          .header {
-              background-color: #f8f8f8;
-              padding: 10px;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              border-bottom: 2px solid #f0c040;
-          }
-          .header .logo {
-              font-size: 24px;
-              font-weight: bold;
-              color: #2e7d32;
-          }
-          .header .search {
-              flex-grow: 1;
-              margin-left: 20px;
-          }
-          .header .search input {
-              width: 100%;
-              padding: 5px;
-              font-size: 16px;
-          }
-          .header .links {
-              display: flex;
-              gap: 15px;
-          }
-          .container {
-              display: flex;
-              height: calc(100% - 50px);
-          }
-          .sidebar {
-              width: 250px;
-              background-color: #f0f0f0;
-              padding: 15px;
-              border-right: 1px solid #ddd;
-          }
-          .sidebar h3 {
-              margin-top: 0;
-              color: #2e7d32;
-          }
-         
-          .main-content {
-              flex-grow: 1;
-              padding: 20px;
-          }
-          .main-content h2 {
-              margin-top: 0;
-          }
-          .main-content .items {
-              display: flex;
-              flex-wrap: wrap;
-              gap: 20px;
-          }
-          .main-content .item {
-              width: 100px;
-              text-align: center;
-          }
-          .main-content .item img {
-              width: 100%;
-              height: auto;
-          }
-          .footer {
-              background-color: #f8f8f8;
-              padding: 10px;
-              text-align: center;
-              border-top: 1px solid #ddd;
-          }
-          .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-          }
-        
-          .sidebar ul li {
-              margin: 10px 0;
-          }
-          .sidebar ul li a {
-              text-decoration: none;
-              color: #333; /* Dark gray color */
-              font-size: 16px;
-              transition: color 0.3s ease;
-          }
-          .sidebar ul li a:hover {
-              color: #2e7d32; /* Green color on hover */
-          }
-      </style>
-      {{ content_for_header }}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McLiquid</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: Arial, sans-serif;
+      }
+      .header {
+        background-color: #f8f8f8;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #f0c040;
+      }
+      .header .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2e7d32;
+      }
+      .header .search {
+        flex-grow: 1;
+        margin-left: 20px;
+      }
+      .header .search input {
+        width: 100%;
+        padding: 5px;
+        font-size: 16px;
+      }
+      .header .links {
+        display: flex;
+        gap: 15px;
+      }
+      .container {
+        display: flex;
+        height: calc(100% - 50px);
+      }
+      .sidebar {
+        width: 250px;
+        background-color: #f0f0f0;
+        padding: 15px;
+        border-right: 1px solid #ddd;
+      }
+      .sidebar h3 {
+        margin-top: 0;
+        color: #2e7d32;
+      }
+
+      .main-content {
+        flex-grow: 1;
+        padding: 20px;
+      }
+      .main-content h2 {
+        margin-top: 0;
+      }
+      .main-content .items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .main-content .item {
+        width: 100px;
+        text-align: center;
+      }
+      .main-content .item img {
+        width: 100%;
+        height: auto;
+      }
+      .footer {
+        background-color: #f8f8f8;
+        padding: 10px;
+        text-align: center;
+        border-top: 1px solid #ddd;
+      }
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        margin: 10px 0;
+      }
+      .sidebar ul li a {
+        text-decoration: none;
+        color: #333; /* Dark gray color */
+        font-size: 16px;
+        transition: color 0.3s ease;
+      }
+      .sidebar ul li a:hover {
+        color: #2e7d32; /* Green color on hover */
+      }
+    </style>
+    {{ content_for_header }}
   </head>
   <body>
-      <div class="header">        
-          <div class="logo"><a href="/" style="text-decoration: none; color: #2e7d32">McLiquid</a></div>
-          <div class="search">
-              <input type="text" placeholder="Search...">
-          </div>
-          <div class="links">
-              <a href="#">Log in</a>
-              <a href="#">Order History</a>
-          </div>
+    <div class="header">
+      <div class="logo"><a href="/" style="text-decoration: none; color: #2e7d32">McLiquid</a></div>
+      <div class="search">
+        <input type="text" placeholder="Search...">
       </div>
-      <div class="container">
-          <div class="sidebar">
-              <h3>Choose a Category</h3>
-              <ul>
-              {% for collection in collections %}
-                <li><a href="{{collection.url}}">{{ collection.title }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="main-content">
-            {{ content_for_layout }}
-          </div>
+      <div class="links">
+        <a href="/cart">Order ({{ cart.item_count }})</a>
+        <a href="#">Order History</a>
       </div>
-      <div class="footer">
-          <p>Home | Location | Returns | Careers | Mobile App | Solidworks Add-In | Help | Settings</p>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <h3>Choose a Category</h3>
+        <ul>
+          {% for collection in collections %}
+            <li>
+              <a href="{{collection.url}}">{{ collection.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
+      <div class="main-content">
+        {{ content_for_layout }}
+      </div>
+    </div>
+    <div class="footer">
+      <p>Home | Location | Returns | Careers | Mobile App | Solidworks Add-In | Help | Settings</p>
+    </div>
   </body>
-  </html>
+</html>
