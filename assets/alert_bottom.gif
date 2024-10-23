@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+   <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />    
+		<title>Software error</title>   
+		<link rel="stylesheet" href="/stylesheets/dialog.css" type="text/css" media="screen" />
+		<link rel="Start" title="Home" href="/" />   
+		<meta name="author" content="Tobias Luetke" />
+		<meta name="copyright" content="Creative commons" />
+	</head>
+   
+	<body>
+  <div id="content">
+  	<a href="/">home</a> | 
+  	<a href="mailto:tobi@leetsoft.com">email staff</a> 
+
+ 	 <h2>File not found</h2>
+
+    <p>The requested file could not be found. </p>
+    
+    <a href="/">Return to shop &#187;</a>
+  </div>
+</body>  
+</html>
+

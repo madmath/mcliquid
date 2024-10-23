@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>
+      {{ shop.name }}
+      -
+      {{ page_title }}
+    </title>
+
+    {{ 'layout.css' | asset_url | stylesheet_tag }}
+    {{ 'lightbox/v2/lightbox.css' | global_asset_url | stylesheet_tag }}
+    {{ 'lightbox/v2/lightbox.js' | global_asset_url | script_tag }}
+
+    <script type="text/javascript">
+      var loadingImage = '{{ 'lightbox/v2/loading.gif' | global_asset_url }}';
+      var closeButton  = '{{ 'lightbox/v2/close.gif'   | global_asset_url }}';
+    </script>
+
+    {{ content_for_header }}
+
+    <meta name="robots" content="noindex">
+  </head>
+  <body>
+    <div id="demostore">
+      This is a <a href="http://shopify.com">Shopify</a> demo store. We do not have the products advertised here and we
+      don't really charge money upon order completion.
+    </div>
+    <div id="main">
+      <div id="container">
+        <div id="header">
+          <ul id="sitelinks">
+            {% for link in linklists.footer.links %}
+              <li>{{ link.title | link_to: link.url }}</li>
+            {% endfor %}
+            <li class="cartlink">
+              {% if cart.item_count == 0 %}
+                <strong>Shopping Cart</strong>
+                <img src="{{ 'cart.gif' | asset_url }}" alt="Shopping Cart" height="26" width="26" loading="eager">
+              {% else %}
+                <strong><a href="/cart">Shopping Cart</a></strong> ({{ cart.item_count }}
+                {{ cart.item_count | pluralize: 'item', 'items' }})<img
+                  src="{{ 'cart.gif' | asset_url }}"
+                  alt="Shopping Cart"
+                  height="26"
+                  width="26"
+                  loading="eager"
+                >
+              {% endif %}
+            </li>
+          </ul>
+
+          <div class="linetop"></div>
+          <table id="header-table">
+            <tr>
+              <td>
+                <a href="/"><img alt="Logo" src="{{ 'logo.gif' | asset_url }}"></a>
+              </td>
+
+              <td><img src="{{ 'mountains.gif' | asset_url }}" alt=""></td>
+            </tr>
+          </table>
+          <div class="linebottom"></div>
+        </div>
+
+        <div id="side" class="left">
+          <div class="menubar">
+            <ul id="nav">
+              {% for link in linklists['main-menu'].links %}
+                <li class="{%if forloop.first%}home first{%endif%}{%if forloop.last%}last{%endif%}">
+                  <strong>{{ link.title | link_to: link.url }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div id="searchbox">
+            <form method="get" action="/search">
+              <input
+                type="text"
+                size="16"
+                name="q"
+                onfocus="if(this.value='Search...'){this.value = ''}"
+                value="Search..."
+              >
+            </form>
+          </div>
+
+          <div id="featurebox">
+            <ul id="feature">
+              <li class="first"><strong>Blowout Deals</strong></li>
+              {% for link in linklists.deals.links %}
+                <li class="">{{ link.title | link_to: link.url }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div id="content" class="content">
+          {{ content_for_layout }}
+        </div>
+
+        <div id="footer">
+          <p>
+            <span>All rights reserved.</span>
+            <br>
+            <br>
+            <span> Copyright {{ 'now' | date: '2005-%Y' }} Snowdevil.</span>
+            <span>All sales are final. All prices in Canadian dollars.</span><br>
+            <span class="partners"
+              >Please visit our partner pages:
+              <a target="_blank" href="http://www.hoppels.com">Windsurf &amp; Kitesurf Shop</a>
+              <a target="_blank" href="http://www.brett-ist-brett.de">Funsport Photo Community</a>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

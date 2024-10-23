@@ -1,0 +1,105 @@
+<script>
+<!--
+function remove_item(id)
+{
+    document.getElementById('updates_'+id).value = 0;
+    document.getElementById('cart').submit(); 
+}
+-->
+</script>
+
+<h2>Shopping Cart</h2>
+<div>
+  {% if cart.item_count == 0 %}
+
+  <div class="alertbox">
+  <div class="alertcontent">
+  <strong>Your shopping cart is empty</strong>
+
+  <p>Note that this can happen if you disabled cookies in your browser</p>
+  <p>We strongly recommends to enable cookies. Many webpages need them to work properly.</p>
+
+
+  <p>{{ 'Back to frontpage' | link_to: '/' }}</p>
+
+  </div>
+  </div>
+
+  {% else %}
+
+  <form action="/cart" id="cart" method="post">
+
+
+  <div style="float:right; margin:10px">
+  <div style="text-align:right">{{ content_for_additional_checkout_buttons }}</div><br />
+  <input type="image" value="Checkout!" name="checkout" src="{{ 'b_proceed.gif' | asset_url }}" />
+  </div>
+
+  <p class="first">Review the items in your cart, make any changes, then proceed to the checkout, or continue shopping for more products.</p>
+
+
+  <table id="shoppingcart" cellspacing="0" cellpadding="4" style="clear:right">
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Extension</th>
+        <th>&nbsp;</th>
+      </tr>
+
+      {% for item in cart.items %}
+      
+      <tr class="itemrow">
+              <td>
+                {{ product.featured_image | product_img_url: 'pico' | img_tag  }}
+                {{ item.product.vendor}}: {{item.title}}
+              </td>
+              <td align="right">{{item.price | money}}</td>
+              <td><input type="text" size="4" name="updates[]" id="updates_{{item.id}}" value="{{item.quantity}}" onfocus="this.select();"/></td>
+
+              <td align="right">{{item.line_price | money}}</td>
+              <td><a href="#" onclick="remove_item({{item.id}});" class="remove">remove</a></td>
+      </tr>
+      
+      {% endfor %}
+      
+
+      <tr id="subtotal">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td align="right">Subtotal:</td>
+          <td align="right">{{ cart.total_price | money }}</td>
+          <td><span class="currency">{{shop.currency}}</span></td>
+      </tr>
+
+      <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>{% comment %}<input type="image" src="{{'b_checkout.gif'| asset_url}}" name="checkout" value="Checkout" />{% endcomment %}</td>
+          <td><input type="image" src="{{'b_update.gif'| asset_url}}" value="Update Cart" /></td>
+      </tr>
+  </table>
+
+  </form>
+
+  {% endif %}
+
+  <h3>You may also like...</h3>
+  <table cellpadding="5"> 
+  {% for product in collections.addons.products %}
+  <td style="text-algin:center">
+    <form action="/cart/add" method="POST">
+    <input type="hidden" name="id" value="{{product.variants.first.id}}" />    
+    <a href="#" onclick="this.parentNode.submit();">
+    {{ product.featured_image | product_img_url: 'icon' | img_tag }} 
+    </a>
+    </form>
+  </td>
+  {% endfor %}
+  </table>
+
+  <ul>
+  <li><strong>This store is only for demonstration purposes. No items will be shipped</li></li>
+  </ul>
+</div>
