@@ -57,7 +57,7 @@
             <strong>Choose a Category</strong>
             <ul id="nav">
               {% for link in linklists['main-menu'].links %}
-                <li class="{%if forloop.first%}home first{%endif%}{%if forloop.last%}last{%endif%}">
+                <li>
                   <strong>{{ link.title | link_to: link.url }}</strong>
                 </li>
               {% endfor %}
