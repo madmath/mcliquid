@@ -103,7 +103,9 @@
     <div class="header">
       <div class="logo"><a href="/" style="text-decoration: none; color: #2e7d32">McLiquid</a></div>
       <div class="search">
-        <input type="text" placeholder="Search...">
+        <form method="get" action="/search">
+          <input name="q" type="text" placeholder="Search...">
+        </form>
       </div>
       <div class="links">
         <a href="/cart">Order ({{ cart.item_count }})</a>
