@@ -56,9 +56,9 @@
           <div class="menubar">
             <strong>Choose a Category</strong>
             <ul id="nav">
-              {% for collection in collections %}
+              {% for link in linklists['main-menu'].links %}
                 <li class="{%if forloop.first%}home first{%endif%}{%if forloop.last%}last{%endif%}">
-                  <strong>{{ collection.title | link_to: collection.url }}</strong>
+                  <strong>{{ link.title | link_to: link.url }}</strong>
                 </li>
               {% endfor %}
             </ul>
