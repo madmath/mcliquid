@@ -179,6 +179,8 @@ body {
   padding: 0;
   font-size: 8pt;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
 }
 
 #sitelinks li {
@@ -186,8 +188,9 @@ body {
   padding: 0 10px;
 }
 
-#sitelinks li .cartlink {
-  padding-left: 20px;
+.cartlink {
+  display: inline-flex!important;
+  gap: 20px;
 }
 
 #sitelinks {}
@@ -218,8 +221,7 @@ body {
 }
 
 #searchbox {            
-  float: left; 
-  margin: 25px 15px 45px 15px;
+  display: inline;
 }           
 
           

@@ -31,60 +31,37 @@
       <div id="container">
         <div id="header">
           <ul id="sitelinks">
-            {% for link in linklists.footer.links %}
-              <li>{{ link.title | link_to: link.url }}</li>
-            {% endfor %}
-            <li class="cartlink">
-              {% if cart.item_count == 0 %}
-                <strong>Shopping Cart</strong>
-                <img src="{{ 'cart.gif' | asset_url }}" alt="Shopping Cart" height="26" width="26" loading="eager">
-              {% else %}
-                <strong><a href="/cart">Shopping Cart</a></strong> ({{ cart.item_count }}
-                {{ cart.item_count | pluralize: 'item', 'items' }})<img
-                  src="{{ 'cart.gif' | asset_url }}"
-                  alt="Shopping Cart"
-                  height="26"
-                  width="26"
-                  loading="eager"
+            <li><a href="/">McLiquid</a></li>
+            <li id="searchbox">
+              <form method="get" action="/search">
+                <input
+                  type="text"
+                  size="16"
+                  name="q"
+                  onfocus="if(this.value='Search...'){this.value = ''}"
+                  value="Search..."
                 >
-              {% endif %}
+              </form>
+            </li>
+            <li class="cartlink">
+              <div>
+                <strong><a href="/cart">ORDER</a></strong> ({{ cart.item_count }})
+              </div>
+              <strong><a href="#">ORDER HISTORY</a></strong>
             </li>
           </ul>
-
-          <div class="linetop"></div>
-          <table id="header-table">
-            <tr>
-              <td>
-                <a href="/"><img alt="Logo" src="{{ 'logo.gif' | asset_url }}"></a>
-              </td>
-
-              <td><img src="{{ 'mountains.gif' | asset_url }}" alt=""></td>
-            </tr>
-          </table>
-          <div class="linebottom"></div>
         </div>
 
         <div id="side" class="left">
           <div class="menubar">
+            <strong>Choose a Category</strong>
             <ul id="nav">
-              {% for link in linklists['main-menu'].links %}
+              {% for collection in collections %}
                 <li class="{%if forloop.first%}home first{%endif%}{%if forloop.last%}last{%endif%}">
-                  <strong>{{ link.title | link_to: link.url }}</strong>
+                  <strong>{{ collection.title | link_to: collection.url }}</strong>
                 </li>
               {% endfor %}
             </ul>
-          </div>
-
-          <div id="searchbox">
-            <form method="get" action="/search">
-              <input
-                type="text"
-                size="16"
-                name="q"
-                onfocus="if(this.value='Search...'){this.value = ''}"
-                value="Search..."
-              >
-            </form>
           </div>
 
           <div id="featurebox">
