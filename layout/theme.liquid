@@ -1,92 +1,129 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+  <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>
-      {{ shop.name }}
-      -
-      {{ page_title }}
-    </title>
-
-    {{ 'layout.css' | asset_url | stylesheet_tag }}
-    {{ 'lightbox/v2/lightbox.css' | global_asset_url | stylesheet_tag }}
-    {{ 'lightbox/v2/lightbox.js' | global_asset_url | script_tag }}
-
-    <script type="text/javascript">
-      var loadingImage = '{{ 'lightbox/v2/loading.gif' | global_asset_url }}';
-      var closeButton  = '{{ 'lightbox/v2/close.gif'   | global_asset_url }}';
-    </script>
-
-    {{ content_for_header }}
-
-    <meta name="robots" content="noindex">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>McLiquid</title>
+      <style>
+          body, html {
+              margin: 0;
+              padding: 0;
+              height: 100%;
+              font-family: Arial, sans-serif;
+          }
+          .header {
+              background-color: #f8f8f8;
+              padding: 10px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              border-bottom: 2px solid #f0c040;
+          }
+          .header .logo {
+              font-size: 24px;
+              font-weight: bold;
+              color: #2e7d32;
+          }
+          .header .search {
+              flex-grow: 1;
+              margin-left: 20px;
+          }
+          .header .search input {
+              width: 100%;
+              padding: 5px;
+              font-size: 16px;
+          }
+          .header .links {
+              display: flex;
+              gap: 15px;
+          }
+          .container {
+              display: flex;
+              height: calc(100% - 50px);
+          }
+          .sidebar {
+              width: 250px;
+              background-color: #f0f0f0;
+              padding: 15px;
+              border-right: 1px solid #ddd;
+          }
+          .sidebar h3 {
+              margin-top: 0;
+              color: #2e7d32;
+          }
+         
+          .main-content {
+              flex-grow: 1;
+              padding: 20px;
+          }
+          .main-content h2 {
+              margin-top: 0;
+          }
+          .main-content .items {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 20px;
+          }
+          .main-content .item {
+              width: 100px;
+              text-align: center;
+          }
+          .main-content .item img {
+              width: 100%;
+              height: auto;
+          }
+          .footer {
+              background-color: #f8f8f8;
+              padding: 10px;
+              text-align: center;
+              border-top: 1px solid #ddd;
+          }
+          .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+          }
+        
+          .sidebar ul li {
+              margin: 10px 0;
+          }
+          .sidebar ul li a {
+              text-decoration: none;
+              color: #333; /* Dark gray color */
+              font-size: 16px;
+              transition: color 0.3s ease;
+          }
+          .sidebar ul li a:hover {
+              color: #2e7d32; /* Green color on hover */
+          }
+      </style>
+      {{ content_for_header }}
   </head>
   <body>
-    <div id="demostore">
-      This is a <a href="http://shopify.com">Shopify</a> demo store. We do not have the products advertised here and we
-      don't really charge money upon order completion.
-    </div>
-    <div id="main">
-      <div id="container">
-        <div id="header">
-          <ul id="sitelinks">
-            <li><a href="/">McLiquid</a></li>
-            <li id="searchbox">
-              <form method="get" action="/search">
-                <input
-                  type="text"
-                  size="16"
-                  name="q"
-                  onfocus="if(this.value='Search...'){this.value = ''}"
-                  value="Search..."
-                >
-              </form>
-            </li>
-            <li class="cartlink">
-              <div>
-                <strong><a href="/cart">ORDER</a></strong> ({{ cart.item_count }})
-              </div>
-              <strong><a href="#">ORDER HISTORY</a></strong>
-            </li>
-          </ul>
-        </div>
-
-        <div id="side" class="left">
-          <div class="menubar">
-            <strong>Choose a Category</strong>
-            <ul id="nav">
-              {% for link in linklists['main-menu'].links %}
-                <li>
-                  <strong>{{ link.title | link_to: link.url }}</strong>
-                  {% for sublink in link.links %}
-                    <li>{{ sublink.title | link_to: sublink.url }}</li>
-                  {% endfor %}
-                </li>
+      <div class="header">        
+          <div class="logo"><a href="/" style="text-decoration: none; color: #2e7d32">McLiquid</a></div>
+          <div class="search">
+              <input type="text" placeholder="Search...">
+          </div>
+          <div class="links">
+              <a href="#">Log in</a>
+              <a href="#">Order History</a>
+          </div>
+      </div>
+      <div class="container">
+          <div class="sidebar">
+              <h3>Choose a Category</h3>
+              <ul>
+              {% for collection in collections %}
+                <li><a href="{{collection.url}}">{{ collection.title }}</a></li>
               {% endfor %}
             </ul>
           </div>
-        </div>
-
-        <div id="content" class="content">
-          {{ content_for_layout }}
-        </div>
-
-        <div id="footer">
-          <p>
-            <span>All rights reserved.</span>
-            <br>
-            <br>
-            <span> Copyright {{ 'now' | date: '2005-%Y' }} Snowdevil.</span>
-            <span>All sales are final. All prices in Canadian dollars.</span><br>
-            <span class="partners"
-              >Please visit our partner pages:
-              <a target="_blank" href="http://www.hoppels.com">Windsurf &amp; Kitesurf Shop</a>
-              <a target="_blank" href="http://www.brett-ist-brett.de">Funsport Photo Community</a>
-            </span>
-          </p>
-        </div>
+          <div class="main-content">
+            {{ content_for_layout }}
+          </div>
       </div>
-    </div>
+      <div class="footer">
+          <p>Home | Location | Returns | Careers | Mobile App | Solidworks Add-In | Help | Settings</p>
+      </div>
   </body>
-</html>
+  </html>
