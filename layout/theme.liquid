@@ -59,6 +59,9 @@
               {% for link in linklists['main-menu'].links %}
                 <li>
                   <strong>{{ link.title | link_to: link.url }}</strong>
+                  {% for sublink in link.links %}
+                    <li>{{ sublink.title | link_to: sublink.url }}</li>
+                  {% endfor %}
                 </li>
               {% endfor %}
             </ul>
