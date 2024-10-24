@@ -1,7 +1,7 @@
 {
   "sections": {
-    "multicolumn_kWFTwG": {
-      "type": "multicolumn",
+    "homepage-categories_kWFTwG": {
+      "type": "homepage-categories",
       "blocks": {
         "column_rxH6JQ": {
           "type": "column",
@@ -10,7 +10,8 @@
             "title": "{{ block.repeater.name.value }}",
             "description": "{{ block.repeater.description | metafield_tag }}",
             "link_label": "",
-            "link": "{{ block.repeater.system.url }}"
+            "link": "{{ block.repeater.system.url }}",
+            "children_categories": "{{ block.repeater.children_categories }}"
           }
         }
       },
@@ -20,6 +21,6 @@
     }
   },
   "order": [
-    "multicolumn_kWFTwG"
+    "homepage-categories_kWFTwG"
   ]
 }

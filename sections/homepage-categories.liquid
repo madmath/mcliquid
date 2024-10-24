@@ -1,0 +1,76 @@
+<style></style>
+
+<h1 class="section-title">
+  {%- assign title_parts = section.blocks.first.settings.title | split: ' > ' -%}
+  {%- assign title_parts_count = title_parts | size -%}
+  {%- for part in title_parts -%}
+    {%- if forloop.index < title_parts_count -%}
+      {{ part -}}
+      {%- unless forloop.last %} > {% endunless %}
+    {%- endif -%}
+  {%- endfor -%}
+</h1>
+
+<div class="grid">
+  {%- for block in section.blocks -%}
+    <a href="{{ block.settings.link }}" class="card">
+      <div class="card__title">{{ block.settings.title | split: ' > ' | last }}</div>
+    </a>
+    <ul>
+      {%- for child in block.settings.children_categories.value -%}
+        <li>
+          <a href="{{ child.system.url }}">{{ child.name }}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Multicolumn",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "description text"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "link label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "link url"
+        },
+        {
+          "type": "metaobject_list",
+          "id": "children_categories",
+          "label": "children categories"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
