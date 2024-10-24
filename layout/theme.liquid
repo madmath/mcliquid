@@ -38,15 +38,22 @@
         display: flex;
         gap: 15px;
       }
+      body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
       .container {
         display: flex;
-        height: calc(100% - 50px);
+        flex-grow: 1;
+        overflow-y: hidden;
       }
       .sidebar {
         width: 250px;
         background-color: #f0f0f0;
         padding: 15px;
         border-right: 1px solid #ddd;
+        height: 100%;
       }
       .sidebar h3 {
         margin-top: 0;
@@ -56,6 +63,8 @@
       .main-content {
         flex-grow: 1;
         padding: 20px;
+        height: 100%;
+        overflow-y: auto;
       }
       .main-content h2 {
         margin-top: 0;
@@ -96,32 +105,49 @@
       .sidebar ul li a:hover {
         color: #2e7d32; /* Green color on hover */
       }
+
+      .categories-header {
+        border-bottom: 1px solid #ddd;
+      }
+
+      .categories {
+        height: 100%;
+        overflow-y: scroll;
+        padding: 0;
+      }
     </style>
     {{ content_for_header }}
   </head>
   <body>
-    <div class="header">
+    <nav class="header">
       <div class="logo"><a href="/" style="text-decoration: none; color: #2e7d32">McLiquid</a></div>
       <div class="search">
-        <form method="get" action="/search">
-          <input name="q" type="text" placeholder="Search...">
+        <form method="get" action="{{ routes.search_url }}">
+          <input
+            type="text"
+            placeholder="Search"
+            name="q"
+            value="{{ search.terms | escape }}"
+          >
         </form>
       </div>
       <div class="links">
         <a href="/cart">Order ({{ cart.item_count }})</a>
         <a href="#">Order History</a>
       </div>
-    </div>
+    </nav>
     <div class="container">
       <div class="sidebar">
-        <h3>Choose a Category</h3>
-        <ul>
-          {% for collection in collections %}
-            <li>
-              <a href="{{collection.url}}">{{ collection.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
+        <h3 class="categories-header">Choose a Category</h3>
+        <div class="categories">
+          <ul>
+            {% for collection in collections %}
+              <li>
+                <a href="{{collection.url}}">{{ collection.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
       <div class="main-content">
         {{ content_for_layout }}
