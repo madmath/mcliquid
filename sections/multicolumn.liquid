@@ -48,23 +48,22 @@
 
   .section-title {
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
+    border-bottom: 1px solid black;
   }
 </style>
 
-<div class="section-title">
-  <h1>
-    {%- assign title_parts = section.blocks.first.settings.title | split: ' > ' -%}
-    {%- assign title_parts_count = title_parts | size -%}
-    {%- for part in title_parts -%}
-      {%- if forloop.index < title_parts_count -%}
-        {{ part -}}
-        {%- unless forloop.last %} > {% endunless %}
-      {%- endif -%}
-    {%- endfor -%}
-  </h1>
-</div>
+<h1 class="section-title">
+  {%- assign title_parts = section.blocks.first.settings.title | split: ' > ' -%}
+  {%- assign title_parts_count = title_parts | size -%}
+  {%- for part in title_parts -%}
+    {%- if forloop.index < title_parts_count -%}
+      {{ part -}}
+      {%- unless forloop.last %} > {% endunless %}
+    {%- endif -%}
+  {%- endfor -%}
+</h1>
 
 <div class="grid">
   {%- for block in section.blocks -%}
