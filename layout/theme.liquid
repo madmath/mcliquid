@@ -70,14 +70,9 @@
         height: 100%;
         flex-shrink: 0;
       }
-      .sidebar h3 {
-        margin-top: 0;
-        color: #2e7d32;
-      }
 
       .main-content {
         flex-grow: 1;
-        padding: 20px;
         height: 100%;
         overflow-y: auto;
       }
@@ -109,13 +104,13 @@
         margin: 0;
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.25rem;
       }
 
       .sidebar ul li a {
         text-decoration: none;
         color: #333; /* Dark gray color */
-        font-size: 16px;
+        font-size: 0.8rem;
         transition: color 0.3s ease;
       }
       .sidebar ul li a:hover {
@@ -123,9 +118,14 @@
       }
 
       .categories-header {
-        border-bottom: 1px solid black;
-        padding: 0.5rem 0.5rem;
+        font-size: 1rem;
+        font-weight: normal;
         margin: 0;
+        position: sticky;
+        top: 0;
+        border-bottom: 1px solid black;
+        padding: 0.5rem;
+        color: black;
       }
 
       .categories {
