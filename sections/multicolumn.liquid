@@ -1,0 +1,85 @@
+<style>
+    .card {
+        display: flex;
+        margin-bottom: 20px;
+    }
+    .card__image {
+        flex: 1;
+        margin-right: 20px;
+    }
+    .card__content {
+        flex: 2;
+    }
+    .card__title {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    .card__description {
+        margin-bottom: 10px;
+    }
+    .card__link {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+</style>
+{%- for block in section.blocks -%}
+<div class="card">
+    <div class="card__image">
+        <img width="100px" height="100px" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+    </div>
+    <div class="card__content">
+        <div class="card__title">{{ block.settings.title }}</div>
+        <div class="card__description">{{ block.settings.description }}</div>
+        <a href="{{ block.settings.link }}" class="card__link">{{ block.settings.link_label }}</a>
+    </div>
+</div>
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "Multicolumn",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "description text"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "link label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "link url"
+        }
+      ]
+    }
+  ],
+}
+{% endschema %}

@@ -140,16 +140,21 @@
     </nav>
     <div class="container">
       <div class="sidebar">
-        <h3 class="categories-header">Choose a Category</h3>
-        <div class="categories">
-          <ul>
-            {% for collection in collections %}
-              <li>
-                <a href="{{collection.url}}">{{ collection.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
+        <h3>Choose a Category</h3>
+        <ul>
+          {% for category_object in shop.metaobjects.category_metaobject.values %}
+            <li><a href="/pages/category/{{ category_object.url }}">{{ category_object.name }}</a></li>
+          {% endfor %}
+          <li>
+            <a href="/pages/category/hardware-building-consumables">{{ shop.metaobjects.category_metaobject['hardware-building-consumables'].name }}</a>
+          </li>
+          
+          {% comment %} {% for collection in collections %}
+            <li>
+              <a href="{{collection.url}}">{{ collection.title }}</a>
+            </li>
+          {% endfor %} {% endcomment %}
+        </ul>
       </div>
       <div class="main-content">
         {{ content_for_layout }}
