@@ -142,9 +142,12 @@
       <div class="sidebar">
         <h3>Choose a Category</h3>
         <ul>
-          <li>
-            <a href="/pages/category/hardware-building-consumables">{{ shop.metaobjects.category_metaobject['hardware-building-consumables'].name }}</a>
-          </li>
+            {% for category_object in shop.metaobjects.category_metaobject.values %}
+            {% assign greater_than_count = category_object.name | split: '>' | size | minus: 1 %}
+            {% if greater_than_count == 1 %}
+              <li><a href="{{ category_object.system.url }}">{{ category_object.name }}</a></li>
+            {% endif %}
+            {% endfor %}
         </ul>
       </div>
       <div class="main-content">
