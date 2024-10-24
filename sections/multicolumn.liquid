@@ -1,44 +1,69 @@
 <style>
-    .card {
-        display: flex;
-        margin-bottom: 20px;
+  .card {
+    display: flex;
+    gap: 0.5rem;
+    border: 1px solid lightgrey;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    color: black;
+  }
+  .card:hover {
+    background-color: lightgrey;
+  }
+  .card:hover .card__title {
+    text-decoration: underline;
+  }
+  .card__image {
+  }
+  .card__content {
+    flex: 2;
+  }
+  .card__title {
+    font-size: 1rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
     }
-    .card__image {
-        flex: 1;
-        margin-right: 20px;
+  }
+
+  @media (min-width: 1280px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
     }
-    .card__content {
-        flex: 2;
+  }
+
+  @media (min-width: 1536px) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr);
     }
-    .card__title {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-    }
-    .card__description {
-        margin-bottom: 10px;
-    }
-    .card__link {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-    }
+  }
 </style>
-{%- for block in section.blocks -%}
-<div class="card">
-    <div class="card__image">
-        <img width="100px" height="100px" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
-    </div>
-    <div class="card__content">
+<div class="grid">
+  {%- for block in section.blocks -%}
+    <a href="{{ block.settings.link }}" class="card">
+      <div class="card__image">
+        <img
+          width="100px"
+          height="100px"
+          src="{{ block.settings.image | img_url: 'master' }}"
+          alt="{{ block.settings.title }}"
+        >
+      </div>
+      <div class="card__content">
         <div class="card__title">{{ block.settings.title }}</div>
         <div class="card__description">{{ block.settings.description }}</div>
-        <a href="{{ block.settings.link }}" class="card__link">{{ block.settings.link_label }}</a>
-    </div>
+      </div>
+    </a>
+  {%- endfor -%}
 </div>
-{%- endfor -%}
 
 {% schema %}
 {
@@ -80,6 +105,6 @@
         }
       ]
     }
-  ],
+  ]
 }
 {% endschema %}
