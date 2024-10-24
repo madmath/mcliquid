@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "multicolumn_kWFTwG": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_rxH6JQ": {
+          "type": "column",
+          "repeater": "{{ shop.metaobjects.category_metaobject.hardware.children_categories.value }}",
+          "settings": {
+            "title": "{{ block.repeater.name.value }}",
+            "description": "{{ block.repeater.description | metafield_tag }}",
+            "link_label": "",
+            "link": "{{ block.repeater.system.url }}"
+          }
+        }
+      },
+      "block_order": [
+        "column_rxH6JQ"
+      ],
+    }
+  },
+  "order": [
+    "multicolumn_kWFTwG"
+  ]
+}
