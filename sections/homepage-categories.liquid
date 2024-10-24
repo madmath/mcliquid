@@ -1,30 +1,80 @@
-<style></style>
+<style>
+  .homepage-categories-title {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
 
-<h1 class="section-title">
-  {%- assign title_parts = section.blocks.first.settings.title | split: ' > ' -%}
-  {%- assign title_parts_count = title_parts | size -%}
-  {%- for part in title_parts -%}
-    {%- if forloop.index < title_parts_count -%}
-      {{ part -}}
-      {%- unless forloop.last %} > {% endunless %}
-    {%- endif -%}
-  {%- endfor -%}
-</h1>
+  .small_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding-left: 0;
+  }
 
-<div class="grid">
-  {%- for block in section.blocks -%}
-    <a href="{{ block.settings.link }}" class="card">
-      <div class="card__title">{{ block.settings.title | split: ' > ' | last }}</div>
-    </a>
-    <ul>
+  .small_grid img {
+    border: 1px solid lightgrey;
+  }
+
+  .small_grid a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .small_grid a:hover {
+    text-decoration: underline;
+  }
+
+  .small_grid a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+
+  .category {
+    margin-bottom: 2rem;
+  }
+
+  .small_grid_title {
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: #285028;
+  }
+</style>
+
+<h1 class="homepage-categories-title">All Categories</h1>
+
+{%- for block in section.blocks -%}
+  <div class="category">
+    <h1 class="small_grid_title" href="{{ block.settings.link }}">
+      {{ block.settings.title | split: ' > ' | last }}
+    </h1>
+    <ul class="small_grid">
       {%- for child in block.settings.children_categories.value -%}
-        <li>
-          <a href="{{ child.system.url }}">{{ child.name }}</a>
-        </li>
+        {%- assign child_title_parts = child.name | split: ' > ' -%}
+        {%- if child_title_parts.size == 2 -%}
+          <!-- Check if there is only one ">" -->
+          <li>
+            <a href="{{ child.system.url }}">
+              <img
+                src="{{ child.settings.image | img_url: 'master' }}"
+                alt="{{ child.name }}"
+                width="100%"
+                height="100%"
+              >
+              <div>{{ child_title_parts[1] }}</div>
+              <!-- Use the second part after the first " > " -->
+            </a>
+          </li>
+        {%- endif -%}
       {%- endfor -%}
     </ul>
-  {%- endfor -%}
-</div>
+  </div>
+{%- endfor -%}
 
 {% schema %}
 {
