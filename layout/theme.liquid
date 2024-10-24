@@ -145,12 +145,11 @@
         <div class="categories">
           <ul>
             {% for category_object in shop.metaobjects.category_metaobject.values %}
-              {% assign greater_than_count = category_object.name | split: '>' | size | minus: 1 %}
-              {% if greater_than_count == 1 %}
-                <li>
-                  <a href="{{ category_object.system.url }}">{{ category_object.name }}</a>
-                </li>
-              {% endif %}
+              {% unless category_object.name contains '>' %}
+              <li>
+                <a href="{{ category_object.system.url }}">{{ category_object.name }}</a>
+              </li>
+              {% endunless %}
             {% endfor %}
           </ul>
         </div>
