@@ -136,7 +136,7 @@
     </style>
     {{ content_for_header }}
   </head>
-  <body>
+  <body data-instant-mousedown-shortcut>
     <nav class="header">
       <div class="logo"><a href="/" style="text-decoration: none; color: #2e7d32">McLiquid-Carr</a></div>
       <div class="search">
@@ -174,5 +174,6 @@
     <div class="footer">
       <p>Home | Location | Returns | Careers | Mobile App | Solidworks Add-In | Help | Settings</p>
     </div>
+    <script src="{{ 'instant.page.js' | asset_url }}" type="module" async defer></script>
   </body>
 </html>
