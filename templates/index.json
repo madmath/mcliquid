@@ -16,7 +16,12 @@
           "type": "column",
           "repeater": "{{ shop.metaobjects.category_metaobject['hardware'].children_categories.value }}",
           "settings": {
-          }
+             "title": "{{ block.repeater.name.value }}",
+             "description": "{{ block.repeater.description | metafield_tag }}",
+             "link_label": "",
+             "link": "{{ block.repeater.system.url }}",
+             "children_categories": "{{ block.repeater.children_categories.value }}"
+           }
         }
       },
       "block_order": [
