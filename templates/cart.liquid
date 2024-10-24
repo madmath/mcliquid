@@ -51,7 +51,7 @@ function remove_item(id)
       
       <tr class="itemrow">
               <td>
-                {{ product.featured_image | product_img_url: 'pico' | img_tag  }}
+                {{ product.featured_image | asset_img_url: 'pico' | img_tag  }}
                 {{ item.product.vendor}}: {{item.title}}
               </td>
               <td align="right">{{item.price | money}}</td>
@@ -92,7 +92,7 @@ function remove_item(id)
     <form action="/cart/add" method="POST">
     <input type="hidden" name="id" value="{{product.variants.first.id}}" />    
     <a href="#" onclick="this.parentNode.submit();">
-    {{ product.featured_image | product_img_url: 'icon' | img_tag }} 
+    {{ product.featured_image | asset_img_url: 'icon' }} 
     </a>
     </form>
   </td>
@@ -100,6 +100,6 @@ function remove_item(id)
   </table>
 
   <ul>
-  <li><strong>This store is only for demonstration purposes. No items will be shipped</li></li>
+  <li><strong>This store is only for demonstration purposes. No items will be shipped</strong></li>
   </ul>
 </div>

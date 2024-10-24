@@ -10,11 +10,11 @@
     {% for image in product.images %}
     {% if forloop.first %}
     <a href="{{ image | asset_url }}" class="productimage" rel="lightbox" title="{{product.title}}">
-      <img src="{{ image | asset_url }}" alt="{{product.title}}" />
+      <img width=50 height=50 src="{{ image | asset_url }}" alt="{{product.title}}" />
     </a>
     {% else %}
     <a href="{{ image | asset_url }}" class="productimage-small" rel="lightbox" title="{{product.title}}">
-      <img src="{{ image | asset_url }}" alt="{{product.title}}" />
+      <img width=50 height=50 src="{{ image | asset_url }}" alt="{{product.title}}" />
     </a>
     {% endif %}
     {% endfor %}  
@@ -62,13 +62,6 @@
     
     {{ product.description }}
     
-  </div>
-
-  <script id="expressrex" src="http://shopify.directededge.com/widget/related_products?product={{product.id}}" type="text/javascript" charset="utf-8"></script>
-  
-  
-  <div class="pr_review_summary">
-    <script type="text/javascript">POWERREVIEWS.display.engine(document, { pr_page_id : "product" });</script>
-  </div> 
+  </div>   
   
 </div>
