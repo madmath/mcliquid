@@ -55,6 +55,7 @@
         background-color: #f0f0f0;
         border-right: 1px solid #ddd;
         height: 100%;
+        flex-shrink: 0;
       }
       .sidebar h3 {
         margin-top: 0;
@@ -140,15 +141,19 @@
     </nav>
     <div class="container">
       <div class="sidebar">
-        <h3>Choose a Category</h3>
-        <ul>
+        <h3 class="categories-header">Choose a Category</h3>
+        <div class="categories">
+          <ul>
             {% for category_object in shop.metaobjects.category_metaobject.values %}
-            {% assign greater_than_count = category_object.name | split: '>' | size | minus: 1 %}
-            {% if greater_than_count == 1 %}
-              <li><a href="{{ category_object.system.url }}">{{ category_object.name }}</a></li>
-            {% endif %}
+              {% assign greater_than_count = category_object.name | split: '>' | size | minus: 1 %}
+              {% if greater_than_count == 1 %}
+                <li>
+                  <a href="{{ category_object.system.url }}">{{ category_object.name }}</a>
+                </li>
+              {% endif %}
             {% endfor %}
-        </ul>
+          </ul>
+        </div>
       </div>
       <div class="main-content">
         {{ content_for_layout }}
