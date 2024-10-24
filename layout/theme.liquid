@@ -159,13 +159,12 @@
         <h3 class="categories-header">Choose a Category</h3>
         <div class="categories">
           <ul>
-            {% for category_object in shop.metaobjects.category_metaobject.values %}
-              {% unless category_object.name contains '>' %}
+            {% comment %} Repeat the children here {% endcomment %}
+            {%  for child in shop.metaobjects.category_metaobject['hardware'] %}
                 <li>
-                  <a href="{{ category_object.system.url }}">{{ category_object.name }}</a>
+                  <a href="{{ child.system.url }}">{{ child.name }}</a>
                 </li>
-              {% endunless %}
-            {% endfor %}
+              {% endfor %}
           </ul>
         </div>
       </div>
