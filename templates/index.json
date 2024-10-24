@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "homepage-categories_kWFTwG": {
@@ -5,19 +14,15 @@
       "blocks": {
         "column_rxH6JQ": {
           "type": "column",
-          "repeater": "{{ shop.metaobjects.category_metaobject.hardware.children_categories.value }}",
           "settings": {
-            "title": "{{ block.repeater.name.value }}",
-            "description": "{{ block.repeater.description | metafield_tag }}",
-            "link_label": "",
-            "link": "{{ block.repeater.system.url }}",
-            "children_categories": "{{ block.repeater.children_categories }}"
           }
         }
       },
       "block_order": [
         "column_rxH6JQ"
       ],
+      "settings": {
+      }
     }
   },
   "order": [
