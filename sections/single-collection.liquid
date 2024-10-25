@@ -20,22 +20,23 @@
             <thead>
               <tr>
                 <th>SKU</th>
-                <th></th>
-                <th></th>
+                <th>--</th>
+                <th>--</th>
                 <th>Model</th>
                 <th>Net Weight</th>
-                <th>SKU</th>
                 <th>Each</th>
+                <th>Buy</th>
               </tr>
             </thead>
             <tbody>
               {% for variant in product.variants %}
                 <tr class="variant-row">
+                  <td>{{ variant.sku }}</td>
                   <td>{{ variant.option1 }}</td>
                   <td>{{ variant.option2 }}</td>
                   <td>{{ variant.title }}</td>
-                  <td>{{ variant.weight | default: 'N/A' }}</td>
-                  <td>{{ variant.sku }}</td>
+                  <td>{{ variant.weight | default: 'N/A' }}g</td>
+                  
                   <td>{{ variant.price | money }}</td>
                   <td>
                     <form class="add-to-cart-form" method="post" action="/cart/add">
