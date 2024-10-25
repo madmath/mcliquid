@@ -41,7 +41,8 @@
                     <form class="add-to-cart-form" method="post" action="/cart/add">
                       <input type="hidden" name="id" value="{{ variant.id }}">
                       <input min="1" type="number" id="quantity" name="quantity" value="1">
-                      <input type="submit" value="Add to cart" class="btn">
+                      <input type="submit" value="Add to cart" class="add-button">
+                      <input type="submit" value="Added!" class="added-button" disabled>
                     </form>
                   </td>
                 </tr>
@@ -109,7 +110,50 @@
   .add-to-cart-form input[type='number'] {
     width: 2rem;
   }
+
+  .added-button {
+    display: none;
+  }
 </style>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    const addToCartForms = document.querySelectorAll('.add-to-cart-form');
+
+    addToCartForms.forEach((form) => {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch(window.Shopify.routes.root + 'cart/add.js', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            form.querySelector('.add-button').style.display = 'none';
+            form.querySelector('.added-button').style.display = 'inline-block';
+            setTimeout(() => {
+              form.querySelector('.added-button').style.display = 'none';
+              form.querySelector('.add-button').style.display = 'inline-block';
+            }, 2000);
+            fetch(window.Shopify.routes.root + 'cart.js', {
+              method: 'GET',
+            })
+              .then((response) => response.json())
+              .then((cart) => {
+                console.log(cart);
+                document.querySelector('#cart-item-count').textContent = cart.items.length;
+              });
+          })
+          .catch((error) => {
+            console.error('Error adding item to cart:', error);
+          });
+      });
+    });
+  });
+{% endjavascript %}
 
 {% schema %}
 {
