@@ -16,10 +16,11 @@
           "type": "column",
           "repeater": "{{ metaobject.children_categories.value }}",
           "settings": {
+            "image": "{{ block.repeater.image.value }}",
             "title": "{{ block.repeater.name.value }}",
             "description": "{{ block.repeater.description | metafield_tag }}",
             "link_label": "",
-            "link": "{{ block.repeater.system.url }}",
+            "link": "{{ block.repeater.system.url }}"
           }
         }
       },
@@ -27,12 +28,15 @@
         "column_rxH6JQ"
       ],
       "settings": {
+        "metaobject_collection": [
+
+        ]
       }
     },
     "the_collection": {
       "type": "single-collection",
       "settings": {
-        "collection": "{{ metaobject.collection.value }}",
+        "collection": "{{ metaobject.collection.value }}"
       }
     }
   },
