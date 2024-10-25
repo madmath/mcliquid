@@ -65,12 +65,11 @@
           <!-- Check if there is only one ">" -->
           <li>
             <a href="{{ child.system.url }}">
-              <img
-                src="{{ child.settings.image | img_url: 'master' }}"
-                alt="{{ child.name }}"
-                width="100%"
-                height="100%"
-              >
+              {{
+                child.image
+                | image_url: width: 100
+                | image_tag: alt: child.title
+              }}
               <div>{{ child_title_parts[1] }}</div>
               <!-- Use the second part after the first " > " -->
             </a>
