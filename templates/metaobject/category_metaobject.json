@@ -19,7 +19,7 @@
             "title": "{{ block.repeater.name.value }}",
             "description": "{{ block.repeater.description | metafield_tag }}",
             "link_label": "",
-            "link": "{{ block.repeater.system.url }}"
+            "link": "{{ block.repeater.system.url }}",
           }
         }
       },
