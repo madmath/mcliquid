@@ -118,9 +118,8 @@
 
 {% javascript %}
   document.addEventListener('DOMContentLoaded', function () {
-    const addToCartForms = document.querySelectorAll('.add-to-cart-form');
-
-    addToCartForms.forEach((form) => {
+    // Dynamically add items to the cart without reloading the page
+    document.querySelectorAll('.add-to-cart-form').forEach((form) => {
       form.addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -138,12 +137,12 @@
               form.querySelector('.added-button').style.display = 'none';
               form.querySelector('.add-button').style.display = 'inline-block';
             }, 2000);
+            // Update the cart item count in the page header
             fetch(window.Shopify.routes.root + 'cart.js', {
               method: 'GET',
             })
               .then((response) => response.json())
               .then((cart) => {
-                console.log(cart);
                 document.querySelector('#cart-item-count').textContent = cart.items.length;
               });
           })

@@ -150,7 +150,12 @@
       </div>
       <div class="cart-links">
         <a href="/cart"
-          >Order (<span id="cart-item-count">{{ cart.items.size }}</span>)</a
+          >Order (<span
+            {% comment %} Note: #cart-item-count is updated from single-collection.liquid when products are added to cart {% endcomment %}
+            id="cart-item-count"
+          >
+            {{- cart.items.size -}}</span
+          >)</a
         >
         <a href="#">Order History</a>
       </div>
