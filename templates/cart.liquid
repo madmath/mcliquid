@@ -9,8 +9,8 @@
 </script>
 
 <div class="cart-container">
-  <h1 class="section-title">Cart</h1>
-  <div>
+  <h1 class="section-title">Order</h1>
+  <div class="cart-content">
     {% if cart.item_count == 0 %}
       <div class="alertbox">
         <div class="alertcontent">
@@ -25,33 +25,26 @@
 
     {% else %}
       <form class="cart-form" action="/cart" id="cart" method="post">
-        <table id="shoppingcart" cellspacing="0" cellpadding="4" style="clear:right">
-          <tr>
-            <th></th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Extension</th>
-            <th>&nbsp;</th>
-          </tr>
-
+        <div id="shoppingcart">
           {% for item in cart.items %}
-            <tr class="itemrow">
-              <td>
+            <div class="itemrow">
+              <div class="itemrow-product">
                 {{
                   item.product.featured_image
                   | asset_img_url: 'pico'
                   | img_tag: item.product.title, 'cart-image', '100x100'
                 }}
-              </td>
-              <td>
-                {{ item.product.title }}
                 <div>
-                  {{ item.variant.title }}
+                  <h2 class="itemrow-product-title">{{ item.product.title }}</h2>
+                  <p>
+                    {{ item.variant.title }}
+                  </p>
+                  <p>
+                    {{ item.variant.sku }}
+                  </p>
                 </div>
-              </td>
-              <td align="right">{{ item.price | money }}</td>
-              <td>
+              </div>
+              <div>
                 <input
                   type="text"
                   size="4"
@@ -60,38 +53,22 @@
                   value="{{item.quantity}}"
                   onfocus="this.select();"
                 >
-              </td>
-
-              <td align="right">{{ item.line_price | money }}</td>
-              <td><a href="#" onclick="remove_item({{item.id}});" class="remove">remove</a></td>
-            </tr>
+              </div>
+              <div>{{ item.price | money }}</div>
+              <div align="right">{{ item.final_line_price | money }}</div>
+              <div><a href="#" onclick="remove_item({{item.id}});" class="remove">remove</a></div>
+            </div>
           {% endfor %}
-
-          <tr id="subtotal">
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td align="right">Subtotal:</td>
-            <td align="right">{{ cart.total_price | money }}</td>
-            <td>
-              <span class="currency">{{ shop.currency }}</span>
-            </td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>
-              {% comment %}<input type="image" src="{{'b_checkout.gif'| asset_url}}" name="checkout" value="Checkout" />{% endcomment %}
-            </td>
-            <td><input type="image" src="{{'b_update.gif'| asset_url}}" value="Update Cart"></td>
-          </tr>
-        </table>
+          <input type="image" src="{{'b_update.gif'| asset_url}}" value="Update Cart">
+        </div>
 
         <div class="checkout-buttons">
+          <div>
+            Merchandise {{ cart.total_price | money }}
+            {{ shop.currency }}
+          </div>
+          <input type="submit" name="checkout" value="PLACE ORDER">
           <div>{{ content_for_additional_checkout_buttons }}</div>
-          <br>
-          <input type="image" value="Checkout!" name="checkout" src="{{ 'b_proceed.gif' | asset_url }}">
         </div>
       </form>
     {% endif %}
@@ -105,6 +82,9 @@
 {% style %}
   .cart-container {
     padding: 0 1rem;
+  }
+  .cart-content {
+    padding-top: 2rem;
   }
   .cart-image {
     height: 100px;
@@ -126,10 +106,46 @@
     justify-content: space-between;
     gap: 1rem;
   }
+  .itemrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+  }
+  .itemrow-product {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+  .itemrow-product p {
+    margin: 0;
+    color: grey;
+    font-size: 0.8rem;
+  }
+  .itemrow-product-title {
+    font-size: 1rem;
+    margin: 0;
+  }
   #shoppingcart {
     flex: 1;
   }
   .checkout-buttons {
     flex-shrink: 0;
+    border-left: 1px solid lightgrey;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .checkout-buttons input {
+    background-color: #363;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    font-weight: 600;
+    font-size: 0.8rem;
   }
 {% endstyle %}
