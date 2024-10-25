@@ -37,7 +37,7 @@
                   <td>{{ variant.specifications_met | default: 'N/A' }}</td>
                   <td>{{ variant.price | money }}</td>
                   <td>
-                    <form method="post" action="/cart/add">
+                    <form class="add-to-cart-form" method="post" action="/cart/add">
                       <input type="hidden" name="id" value="{{ variant.id }}">
                       <input min="1" type="number" id="quantity" name="quantity" value="1">
                       <input type="submit" value="Add to cart" class="btn">
@@ -103,6 +103,10 @@
   }
   .variant-row:hover {
     background-color: #fff5b1; /* Pale yellow background on hover */
+  }
+
+  .add-to-cart-form input[type='number'] {
+    width: 2rem;
   }
 </style>
 
