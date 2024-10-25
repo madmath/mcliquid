@@ -161,18 +161,20 @@
       </div>
     </nav>
     <div class="container">
-      <div class="sidebar">
-        <h3 class="categories-header">Choose a Category</h3>
-        <div class="categories">
-          <ul>
-            {% for child in shop.metaobjects.category_metaobject.hardware.children_categories.value %}
-              <li>
-                <a href="{{ child.system.url }}">{{ child.name }}</a>
-              </li>
-            {% endfor %}
-          </ul>
+      {% if template.name != 'cart' %}
+        <div class="sidebar">
+          <h3 class="categories-header">Choose a Category</h3>
+          <div class="categories">
+            <ul>
+              {% for child in shop.metaobjects.category_metaobject.hardware.children_categories.value %}
+                <li>
+                  <a href="{{ child.system.url }}">{{ child.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
-      </div>
+      {% endif %}
       <div class="main-content">
         {{ content_for_layout }}
       </div>
