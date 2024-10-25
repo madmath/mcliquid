@@ -8,6 +8,7 @@
   <div class="product-collection" style="font-family: Arial, sans-serif;">
     {% for product in collection_products %}
       <div class="product-container">
+        <span id="{{ product.handle }}" class="hash-handle"></span>
         <h3 class="product-title">{{ product.title }}</h3>
         <p class="product-description">{{ product.description | strip_html | truncatewords: 30 }}</p>
 
@@ -70,6 +71,12 @@
   .product-container {
     margin-bottom: 20px;
     padding: 10px;
+    position: relative;
+  }
+  .hash-handle {
+    visibility: hidden;
+    top: -35px;
+    position: absolute;
   }
   .product-title {
     font-size: 18px;

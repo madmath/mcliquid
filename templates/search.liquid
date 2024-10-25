@@ -8,7 +8,7 @@
     {% assign modified_handle = collection_with_longest_handle.handle | remove_first: 'hardware-' %}
     <div>
       <img src="{{ product.featured_image | image_url }}" height="100px" alt="{{ product.title }}">
-      <a href="/pages/category/{{ modified_handle }}">
+      <a href="/pages/category/{{ modified_handle }}#{{ product.handle }}">
         {{ product.title }}
       </a>
     </div>
