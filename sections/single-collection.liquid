@@ -1,49 +1,57 @@
-
 {% assign collection_products = section.settings.collection.products %}
-<div class="product-collection" style="font-family: Arial, sans-serif;">
+{% if collection_products.size > 0 %}
+  <h1 class="section-title">{{ section.settings.collection.title }}</h1>
 
-  <h2 class="collection-title">{{ section.settings.collection.title }}</h2>
-  <p class="product-count">{{ collection_products.size }} Products</p>
+  <div class="product-collection" style="font-family: Arial, sans-serif;">
+    <p class="product-count">{{ collection_products.size }} Products</p>
 
-  {% for product in collection_products %}
-    <div class="product-container">
-      <h3 class="product-title">{{ product.title }}</h3>
-      <p class="product-description">{{ product.description | strip_html | truncatewords: 30 }}</p>
+    {% for product in collection_products %}
+      <div class="product-container">
+        <h3 class="product-title">{{ product.title }}</h3>
+        <p class="product-description">{{ product.description | strip_html | truncatewords: 30 }}</p>
 
-      <div class="product-details">
-        <div class="image-placeholder">
-          <img src="{{ product.featured_image | img_url: '100x100' }}" alt="{{ product.title }}" />
-        </div>
-        <table class="variant-table">
-          <thead>
-            <tr>
-              <th>For Joining</th>
-              <th>Model</th>
-              <th>Net Weight</th>
-              <th>Form</th>
-              <th>Cleanup Method</th>
-              <th>Specifications Met</th>
-              <th>Each</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for variant in product.variants %}
-              <tr class="variant-row" onclick="location.href='{{ variant.url }}';">
-                <td>{{ variant.option2 }}</td>
-                <td>{{ variant.title }}</td>
-                <td>{{ variant.weight | default: 'N/A' }}</td>
-                <td>{{ variant.product_type }}</td>
-                <td>{{ variant.cleanup_method | default: 'N/A' }}</td>
-                <td>{{ variant.specifications_met | default: 'N/A' }}</td>
-                <td>{{ variant.price | money }}</td>
+        <div class="product-details">
+          <div class="image-placeholder">
+            <img src="{{ product.featured_image | img_url: '100x100' }}" alt="{{ product.title }}">
+          </div>
+          <table class="variant-table">
+            <thead>
+              <tr>
+                <th>For Joining</th>
+                <th>Model</th>
+                <th>Net Weight</th>
+                <th>Form</th>
+                <th>Cleanup Method</th>
+                <th>Specifications Met</th>
+                <th>Each</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {% for variant in product.variants %}
+                <tr class="variant-row">
+                  <td>{{ variant.option2 }}</td>
+                  <td>{{ variant.title }}</td>
+                  <td>{{ variant.weight | default: 'N/A' }}</td>
+                  <td>{{ variant.product_type }}</td>
+                  <td>{{ variant.cleanup_method | default: 'N/A' }}</td>
+                  <td>{{ variant.specifications_met | default: 'N/A' }}</td>
+                  <td>{{ variant.price | money }}</td>
+                  <td>
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ variant.id }}">
+                      <input min="1" type="number" id="quantity" name="quantity" value="1">
+                      <input type="submit" value="Add to cart" class="btn">
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  {% endfor %}
-</div>
+    {% endfor %}
+  </div>
+{% endif %}
 
 <style>
   .product-collection {
@@ -87,7 +95,8 @@
     width: 100%;
     border-collapse: collapse;
   }
-  th, td {
+  th,
+  td {
     text-align: left; /* Left-align headers and cells */
     padding: 4px; /* Tighter line height */
     font-size: 12px;
@@ -107,9 +116,9 @@
   },
   "settings": [
     {
-    "type": "collection",
-    "id": "collection",
-    "label": "Collection"
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
     }
   ]
 }

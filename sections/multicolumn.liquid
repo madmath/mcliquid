@@ -41,35 +41,39 @@
   }
 </style>
 
-<h1 class="section-title">
-  {%- assign title_parts = section.blocks.first.settings.title | split: ' > ' -%}
-  {%- assign title_parts_count = title_parts | size -%}
-  {%- for part in title_parts -%}
-    {%- if forloop.index < title_parts_count -%}
-      {{ part -}}
-      {%- unless forloop.last %} > {% endunless %}
-    {%- endif -%}
-  {%- endfor -%}
-</h1>
+{% if section.blocks.first.settings.title %}
+  <h1 class="section-title">
+    {%- assign title_parts = section.blocks.first.settings.title | split: ' > ' -%}
+    {%- assign title_parts_count = title_parts | size -%}
+    {%- for part in title_parts -%}
+      {%- if forloop.index < title_parts_count -%}
+        {{ part -}}
+        {%- unless forloop.last %} > {% endunless %}
+      {%- endif -%}
+    {%- endfor -%}
+  </h1>
+{% endif %}
 
-<div class="grid">
-  {%- for block in section.blocks -%}
-    <a href="{{ block.settings.link }}" class="card">
-      <div class="card__image">
-        <img
-          width="100px"
-          height="100px"
-          src="{{ block.settings.image | image_url: 'master' }}"
-          alt="{{ block.settings.title | split: ' > ' | last }}"
-        >
-      </div>
-      <div class="card__content">
-        <div class="card__title">{{ block.settings.title | split: ' > ' | last }}</div>
-        <div class="card__description">{{ block.settings.description }}</div>
-      </div>
-    </a>
-  {%- endfor -%}
-</div>
+{% if section.blocks.size > 0 %}
+  <div class="grid">
+    {%- for block in section.blocks -%}
+      <a href="{{ block.settings.link }}" class="card">
+        <div class="card__image">
+          <img
+            width="100px"
+            height="100px"
+            src="{{ block.settings.image | image_url: 'master' }}"
+            alt="{{ block.settings.title | split: ' > ' | last }}"
+          >
+        </div>
+        <div class="card__content">
+          <div class="card__title">{{ block.settings.title | split: ' > ' | last }}</div>
+          <div class="card__description">{{ block.settings.description }}</div>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+{% endif %}
 
 {% schema %}
 {
@@ -79,6 +83,14 @@
   "disabled_on": {
     "groups": ["header", "footer"]
   },
+  "settings": [
+    {
+      "type": "metaobject_list",
+      "id": "metaobject_collection",
+      "label": "Metaobject Collection",
+      "metaobject_type": "collection"
+    }
+  ],
   "blocks": [
     {
       "type": "column",
