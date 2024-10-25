@@ -28,13 +28,15 @@
         "column_rxH6JQ"
       ],
       "settings": {
-        "collection": "{{ metaobject.children_categories.value }}"
+        "metaobject_collection": [
+
+        ]
       }
     },
     "the_collection": {
       "type": "single-collection",
       "settings": {
-        "collection": "{{ metaobject.children_categories.value }}"
+        "collection": "{{ metaobject.collection.value }}"
       }
     }
   },

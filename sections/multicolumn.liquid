@@ -60,7 +60,11 @@
     {%- for block in section.blocks -%}
       <a href="{{ block.settings.link }}" class="card">
         <div class="card__image">
-          {{ block.settings.image | image_url: width: 200 | image_tag: alt: block.settings.title }}
+            {{
+                block.settings.image
+                | image_url: width: 200
+                | image_tag: alt: block.settings.title
+              }}
         </div>
         <div class="card__content">
           <div class="card__title">{{ block.settings.title | split: ' > ' | last }}</div>
@@ -81,9 +85,10 @@
   },
   "settings": [
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
+      "type": "metaobject_list",
+      "id": "metaobject_collection",
+      "label": "Metaobject Collection",
+      "metaobject_type": "collection"
     }
   ],
   "blocks": [
