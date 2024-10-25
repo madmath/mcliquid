@@ -1,10 +1,11 @@
 {% assign collection_products = section.settings.collection.products %}
 {% if collection_products.size > 0 %}
-  <h1 class="section-title">{{ section.settings.collection.title }}</h1>
+  <h1 class="section-title">
+    {{ section.settings.collection.title }} ({{ collection_products.size }}
+    {{ collection_products.size | pluralize: 'product', 'products' }})
+  </h1>
 
   <div class="product-collection" style="font-family: Arial, sans-serif;">
-    <p class="product-count">{{ collection_products.size }} Products</p>
-
     {% for product in collection_products %}
       <div class="product-container">
         <h3 class="product-title">{{ product.title }}</h3>
