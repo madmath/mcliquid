@@ -1,0 +1,116 @@
+
+{% assign collection_products = section.settings.collection.products %}
+<div class="product-collection" style="font-family: Arial, sans-serif;">
+
+  <h2 class="collection-title">{{ section.settings.collection.title }}</h2>
+  <p class="product-count">{{ collection_products.size }} Products</p>
+
+  {% for product in collection_products %}
+    <div class="product-container">
+      <h3 class="product-title">{{ product.title }}</h3>
+      <p class="product-description">{{ product.description | strip_html | truncatewords: 30 }}</p>
+
+      <div class="product-details">
+        <div class="image-placeholder">
+          <img src="{{ product.featured_image | img_url: '100x100' }}" alt="{{ product.title }}" />
+        </div>
+        <table class="variant-table">
+          <thead>
+            <tr>
+              <th>For Joining</th>
+              <th>Model</th>
+              <th>Net Weight</th>
+              <th>Form</th>
+              <th>Cleanup Method</th>
+              <th>Specifications Met</th>
+              <th>Each</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for variant in product.variants %}
+              <tr class="variant-row" onclick="location.href='{{ variant.url }}';">
+                <td>{{ variant.option2 }}</td>
+                <td>{{ variant.title }}</td>
+                <td>{{ variant.weight | default: 'N/A' }}</td>
+                <td>{{ variant.product_type }}</td>
+                <td>{{ variant.cleanup_method | default: 'N/A' }}</td>
+                <td>{{ variant.specifications_met | default: 'N/A' }}</td>
+                <td>{{ variant.price | money }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .product-collection {
+    font-family: Arial, sans-serif;
+  }
+  .collection-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .product-count {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .product-container {
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+  .product-title {
+    font-size: 18px;
+    color: green;
+  }
+  .product-description {
+    font-size: 12px;
+  }
+  .product-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .image-placeholder {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+  }
+  .image-placeholder img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .variant-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    text-align: left; /* Left-align headers and cells */
+    padding: 4px; /* Tighter line height */
+    font-size: 12px;
+  }
+  .variant-row:hover {
+    background-color: #fff5b1; /* Pale yellow background on hover */
+  }
+</style>
+
+{% schema %}
+{
+  "name": "homepage-categories",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+    "type": "collection",
+    "id": "collection",
+    "label": "Collection"
+    }
+  ]
+}
+{% endschema %}

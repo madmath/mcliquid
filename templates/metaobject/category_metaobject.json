@@ -28,9 +28,16 @@
       ],
       "settings": {
       }
+    },
+    "the_collection": {
+      "type": "single-collection",
+      "settings": {
+        "collection": "{{ metaobject.collection.value }}",
+      }
     }
   },
   "order": [
-    "multicolumn_kWFTwG"
+    "multicolumn_kWFTwG",
+    "the_collection"
   ]
 }
