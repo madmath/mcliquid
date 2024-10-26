@@ -60,7 +60,6 @@
   <div class="grid">
     {%- for block in section.blocks -%}
       {% for child in block.settings.next_children %}
-        {{ child }}
         <link rel="preload" as="image" href="{{ child.image | image_url: width: 150 }}" >
       {% endfor %}
       <a href="{{ block.settings.link }}" class="card">
