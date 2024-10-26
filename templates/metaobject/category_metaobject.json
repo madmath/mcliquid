@@ -19,7 +19,6 @@
             "image": "{{ block.repeater.image.value }}",
             "title": "{{ block.repeater.name.value }}",
             "description": "{{ block.repeater.description | metafield_tag }}",
-            "link_label": "",
             "link": "{{ block.repeater.system.url }}"
           }
         }
@@ -27,11 +26,6 @@
       "block_order": [
         "column_rxH6JQ"
       ],
-      "settings": {
-        "metaobject_collection": [
-
-        ]
-      }
     },
     "the_collection": {
       "type": "single-collection",
