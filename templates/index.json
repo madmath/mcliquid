@@ -9,8 +9,8 @@
  */
 {
   "sections": {
-    "homepage-categories_kWFTwG": {
-      "type": "homepage-categories",
+    "homepage": {
+      "type": "homepage",
       "blocks": {
         "column_rxH6JQ": {
           "type": "column",
@@ -33,6 +33,6 @@
     }
   },
   "order": [
-    "homepage-categories_kWFTwG"
+    "homepage"
   ]
 }
