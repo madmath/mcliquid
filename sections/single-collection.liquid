@@ -15,7 +15,11 @@
         <div class="product-details">
           <div class="image-placeholder">
             {%  if product.featured_image %}
-            <img src="{{ product.featured_image | img_url: '100x100' }}" alt="{{ product.title }}">
+              {{
+                product.featured_image
+                | image_url: width: 100
+                | image_tag: alt: product.featured_image.alt
+              }}
             {% endif %}
           </div>
           <table class="variant-table">
