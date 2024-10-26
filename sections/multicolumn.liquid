@@ -59,7 +59,7 @@
 {% if section.blocks.size > 0 %}
   <div class="grid">
     {%- for block in section.blocks -%}
-      {% for child in block.settings.next_children.value %}
+      {% for child in block.settings.next_children %}
         {{ child }}
         <link rel="preload" as="image" href="{{ child.image | asset_img_url }}" >
       {% endfor %}
