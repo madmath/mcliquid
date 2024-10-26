@@ -9,8 +9,8 @@
  */
 {
   "sections": {
-    "multicolumn_kWFTwG": {
-      "type": "multicolumn",
+    "category_multicolumn": {
+      "type": "category-multicolumn",
       "blocks": {
         "column_rxH6JQ": {
           "type": "column",
@@ -38,7 +38,7 @@
     }
   },
   "order": [
-    "multicolumn_kWFTwG",
+    "category_multicolumn",
     "the_collection"
   ]
 }
