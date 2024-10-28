@@ -31,7 +31,7 @@
   }
 
   .section-title {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: normal;
     margin: 0;
     position: sticky;
@@ -60,15 +60,11 @@
   <div class="grid">
     {%- for block in section.blocks -%}
       {% for child in block.settings.next_children %}
-        <link rel="preload" as="image" href="{{ child.image | image_url: width: 150 }}" >
+        <link rel="preload" as="image" href="{{ child.image | image_url: width: 150 }}">
       {% endfor %}
       <a href="{{ block.settings.link }}" class="card">
         <div class="card__image">
-            {{
-                block.settings.image
-                | image_url: width: 150
-                | image_tag: alt: block.settings.title
-              }}
+          {{ block.settings.image | image_url: width: 150 | image_tag: alt: block.settings.title }}
         </div>
         <div class="card__content">
           <div class="card__title">{{ block.settings.title | split: ' > ' | last }}</div>

@@ -8,6 +8,7 @@
     background-color: white;
     border-bottom: 1px solid black;
     padding: 0.5rem;
+    z-index: 1;
   }
 
   .small_grid {
@@ -65,11 +66,7 @@
           <!-- Check if there is only one ">" -->
           <li>
             <a href="{{ child.system.url }}">
-              {{
-                child.image
-                | image_url: width: 100
-                | image_tag: alt: child.title
-              }}
+              {{ child.image | image_url: width: 100 | image_tag: alt: child.title }}
               <div>{{ child_title_parts[1] }}</div>
               <!-- Use the second part after the first " > " -->
             </a>
