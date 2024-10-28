@@ -1,6 +1,7 @@
 {% assign collection_products = section.settings.collection.products %}
 {% if collection_products.size > 0 %}
   <h1 class="section-title">
+    All Categories >
     {{ section.settings.collection.title }} ({{ collection_products.size }}
     {{ collection_products.size | pluralize: 'product', 'products' }})
   </h1>
@@ -14,12 +15,8 @@
 
         <div class="product-details">
           <div class="image-placeholder">
-            {%  if product.featured_image %}
-              {{
-                product.featured_image
-                | image_url: width: 100
-                | image_tag: alt: product.featured_image.alt
-              }}
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 100 | image_tag: alt: product.featured_image.alt }}
             {% endif %}
           </div>
           <table class="variant-table">
@@ -42,7 +39,7 @@
                   <td>{{ variant.option2 }}</td>
                   <td>{{ variant.title }}</td>
                   <td>{{ variant.weight | default: 'N/A' }}g</td>
-                  
+
                   <td>{{ variant.price | money }}</td>
                   <td>
                     <form class="add-to-cart-form" method="post" action="/cart/add">

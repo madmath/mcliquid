@@ -11,6 +11,9 @@
   "sections": {
     "category_multicolumn": {
       "type": "category-multicolumn",
+      "settings": {
+        "collection": "{{ metaobject.collection.value }}"
+      },
       "blocks": {
         "column_rxH6JQ": {
           "type": "column",
@@ -27,8 +30,6 @@
       "block_order": [
         "column_rxH6JQ"
       ],
-      "settings": {
-      }
     },
     "the_collection": {
       "type": "single-collection",

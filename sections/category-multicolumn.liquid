@@ -43,16 +43,12 @@
   }
 </style>
 
-{% if section.blocks.first.settings.title %}
+{% assign collection_products = section.settings.collection.products %}
+{% if collection_products.size > 0 %}
   <h1 class="section-title">
-    {%- assign title_parts = section.blocks.first.settings.title | split: ' > ' -%}
-    {%- assign title_parts_count = title_parts | size -%}
-    {%- for part in title_parts -%}
-      {%- if forloop.index < title_parts_count -%}
-        {{ part -}}
-        {%- unless forloop.last %} > {% endunless %}
-      {%- endif -%}
-    {%- endfor -%}
+    All Categories >
+    {{ section.settings.collection.title }} ({{ section.blocks.size }}
+    {{ section.blocks.size | pluralize: 'category', 'categories' }})
   </h1>
 {% endif %}
 
@@ -83,6 +79,13 @@
   "disabled_on": {
     "groups": ["header", "footer"]
   },
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
   "blocks": [
     {
       "type": "column",
