@@ -188,5 +188,27 @@
       <p>Home | Location | Returns | Careers | Mobile App | Solidworks Add-In | Help | Settings</p>
     </div>
     <script src="{{ 'instant.page.js' | asset_url }}" type="module" async defer></script>
+    {% comment %} From: https://shopify.slack.com/archives/C04RA356V3Q/p1730130615296969?thread_ts=1730129357.660839&cid=C04RA356V3Q {% endcomment %}
+    <script type="speculationrules">
+      {
+        "prefetch": [
+          {
+            "source": "document",
+            "eagerness": "conservative",
+            "where": {
+              "and": [
+                { "href_matches": "/*" },
+                { "not": { "href_matches": "/(a|apps|community|tools)/*" } },
+                { "not": { "href_matches": "/*/(a|apps|community|tools)/*" } },
+                { "not": { "href_matches": "/account/logout" } },
+                { "not": { "href_matches": "/*/account/logout" } },
+                { "not": { "href_matches": "/cart/(.+)" } },
+                { "not": { "href_matches": "/*/cart/(.+)" } }
+              ]
+            }
+          }
+        ]
+      }
+    </script>
   </body>
 </html>
