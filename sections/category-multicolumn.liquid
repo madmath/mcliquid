@@ -43,8 +43,7 @@
   }
 </style>
 
-{% assign collection_products = section.settings.collection.products %}
-{% if collection_products.size > 0 %}
+{% if section.blocks.size > 0 %}
   <h1 class="section-title">
     All Categories >
     {{ section.settings.collection.title }} ({{ section.blocks.size }}
