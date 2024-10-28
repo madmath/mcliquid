@@ -1,16 +1,4 @@
 <style>
-  .homepage-categories-title {
-    font-size: 1rem;
-    font-weight: normal;
-    margin: 0;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    border-bottom: 1px solid black;
-    padding: 0.5rem;
-    z-index: 1;
-  }
-
   .small_grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
@@ -52,7 +40,7 @@
   }
 </style>
 
-<h1 class="homepage-categories-title">All Categories</h1>
+<h1 class="sticky-header">All Categories</h1>
 
 {%- for block in section.blocks -%}
   <div class="category">

@@ -124,15 +124,16 @@
         color: #2e7d32; /* Green color on hover */
       }
 
-      .categories-header {
+      .sticky-header {
         font-size: 1rem;
         font-weight: normal;
         margin: 0;
         position: sticky;
         top: 0;
+        background-color: white;
         border-bottom: 1px solid black;
         padding: 0.5rem;
-        color: black;
+        z-index: 1;
       }
 
       .categories {
@@ -193,7 +194,7 @@
     <div class="container">
       {% if template.name != 'cart' %}
         <div class="sidebar">
-          <h3 class="categories-header">Choose a Category</h3>
+          <h3 class="sticky-header" style="background-color: inherit">Choose a Category</h3>
           <div class="categories">
             <ul>
               {% for child in shop.metaobjects.category_metaobject.hardware.children_categories.value %}

@@ -1,6 +1,6 @@
 {% assign collection_products = section.settings.collection.products %}
 {% if collection_products.size > 0 %}
-  <h1 class="section-title">
+  <h1 class="sticky-header">
     All Categories >
     {{ section.settings.collection.title }} ({{ collection_products.size }}
     {{ collection_products.size | pluralize: 'product', 'products' }})
