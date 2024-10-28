@@ -137,6 +137,24 @@
       @view-transition {
         navigation: auto;
       }
+
+      ::view-transition-old(*) {
+        animation: fade 0.1s ease-in forwards;
+      }
+
+      /* New stuff coming in */
+      ::view-transition-new(*) {
+        animation: fade 0.1s ease-in reverse;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
     </style>
     {{ content_for_header }}
   </head>
