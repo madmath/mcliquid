@@ -23,8 +23,8 @@
             <thead>
               <tr>
                 <th>SKU</th>
-                <th>--</th>
-                <th>--</th>
+                <th>{{ product.options[0] }}</th>
+                {% if product.options[1] %}<th>{{  product.options[1] }}</th>{% endif %}
                 <th>Model</th>
                 <th>Net Weight</th>
                 <th>Each</th>
@@ -36,7 +36,7 @@
                 <tr class="variant-row">
                   <td>{{ variant.sku }}</td>
                   <td>{{ variant.option1 }}</td>
-                  <td>{{ variant.option2 }}</td>
+                  {% if variant.option2 %}<td>{{ variant.option2 }}</td>{% endif %}
                   <td>{{ variant.title }}</td>
                   <td>{{ variant.weight | default: 'N/A' }}g</td>
 
