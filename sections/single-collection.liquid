@@ -22,11 +22,13 @@
           <table class="variant-table">
             <thead>
               <tr>
-                <th>SKU</th>
-                <th>{{ product.options[0] }}</th>
-                {% if product.options[1] %}<th>{{  product.options[1] }}</th>{% endif %}
+                <th class="desktop-only">SKU</th>
+                <th class="desktop-only">{{ product.options[0] }}</th>
+                {% if product.options[1] %}
+                  <th class="desktop-only">{{ product.options[1] }}</th>
+                {% endif %}
                 <th>Model</th>
-                <th>Net Weight</th>
+                <th class="desktop-only">Net Weight</th>
                 <th>Each</th>
                 <th>Buy</th>
               </tr>
@@ -34,11 +36,13 @@
             <tbody>
               {% for variant in product.variants %}
                 <tr class="variant-row">
-                  <td>{{ variant.sku }}</td>
-                  <td>{{ variant.option1 }}</td>
-                  {% if variant.option2 %}<td>{{ variant.option2 }}</td>{% endif %}
+                  <td class="desktop-only">{{ variant.sku }}</td>
+                  <td class="desktop-only">{{ variant.option1 }}</td>
+                  {% if variant.option2 %}
+                    <td class="desktop-only">{{ variant.option2 }}</td>
+                  {% endif %}
                   <td>{{ variant.title }}</td>
-                  <td>{{ variant.weight | default: 'N/A' }}g</td>
+                  <td class="desktop-only">{{ variant.weight | default: 'N/A' }}g</td>
 
                   <td>{{ variant.price | money }}</td>
                   <td>
@@ -60,6 +64,14 @@
 {% endif %}
 
 {% stylesheet %}
+  .desktop-only {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .desktop-only {
+      display: table-cell;
+    }
+  }
   .product-collection {
     font-family: Arial, sans-serif;
   }

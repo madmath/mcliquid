@@ -17,17 +17,24 @@
 
       .header {
         background-color: #f8f8f8;
-        padding: 10px;
+        padding: 0.5rem;
+        border-bottom: 2px solid #f0c040;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 2px solid #f0c040;
         gap: 2em;
       }
       .header .logo {
         font-size: 24px;
         font-weight: bold;
         color: #2e7d32;
+      }
+      .header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2em;
+        flex-grow: 1;
       }
       .header .search {
         flex-grow: 1;
@@ -75,6 +82,16 @@
       @media (max-width: 768px) {
         .sidebar {
           display: none;
+        }
+
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+
+        .header-row {
+          width: 100%;
         }
       }
 
@@ -169,26 +186,27 @@
   <body data-instant-mousedown-shortcut data-instant-intensity="viewport-all">
     <nav class="header">
       <div class="logo"><a href="/" style="text-decoration: none; color: #2e7d32">McLiquid-Carr</a></div>
-      <div class="search">
-        <form method="get" action="{{ routes.search_url }}">
-          <input
-            type="text"
-            placeholder="Search"
-            name="q"
-            value="{{ search.terms | escape }}"
+      <div class="header-row">
+        <div class="search">
+          <form method="get" action="{{ routes.search_url }}">
+            <input
+              type="text"
+              placeholder="Search"
+              name="q"
+              value="{{ search.terms | escape }}"
+            >
+          </form>
+        </div>
+        <div class="cart-links">
+          <a href="/cart"
+            >Order (<span
+              {% comment %} Note: #cart-item-count is updated from single-collection.liquid when products are added to cart {% endcomment %}
+              id="cart-item-count"
+            >
+              {{- cart.items.size -}}</span
+            >)</a
           >
-        </form>
-      </div>
-      <div class="cart-links">
-        <a href="/cart"
-          >Order (<span
-            {% comment %} Note: #cart-item-count is updated from single-collection.liquid when products are added to cart {% endcomment %}
-            id="cart-item-count"
-          >
-            {{- cart.items.size -}}</span
-          >)</a
-        >
-        <a href="#">Order History</a>
+        </div>
       </div>
     </nav>
     <div class="container">
